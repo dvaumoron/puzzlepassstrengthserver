@@ -1,5 +1,5 @@
-github.com/dvaumoron/puzzlegrpcserver v1.1.1 h1:5bwoDfriryNcMLDoPRodStBSDZXd2cFJKdn2oc2lxnU=
-github.com/dvaumoron/puzzlegrpcserver v1.1.1/go.mod h1:OBO9CWPuUlh4EyKPHKUAlLqDjs3Wjb1/MH0weG3JcuI=
+github.com/dvaumoron/puzzlegrpcserver v1.1.2 h1:14uTejuYs0+s/79sU+b2iehOIhrEi9I5py6oz5L3kfw=
+github.com/dvaumoron/puzzlegrpcserver v1.1.2/go.mod h1:G91KAz15Kx7QxjrJHtnAx6sY6+4m+lJ3pM8wjQ+wvdg=
 github.com/dvaumoron/puzzlepassstrengthservice v1.0.0 h1:EpibmkrsLxb4ycKQnbEFEhv/pdUTjRoeTy4fqcPOTZs=
 github.com/dvaumoron/puzzlepassstrengthservice v1.0.0/go.mod h1:+bHpuevBZ4eM+Gf/bdLG/E0E6H2r3mud9Mr+fMBLPLs=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
@@ -7,8 +7,8 @@ github.com/golang/protobuf v1.5.2 h1:ROPKBNFfQgOUMifHyP+KYbvpjbdoFNs+aK7DXlji0Tw
 github.com/golang/protobuf v1.5.2/go.mod h1:XVQd3VNwM+JqD3oG2Ue2ip4fOMUkwXdXDdiuN0vRsmY=
 github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
-github.com/joho/godotenv v1.4.0 h1:3l4+N6zfMWnkbPEXKng2o2/MR5mSwTrBih4ZEkkz1lg=
-github.com/joho/godotenv v1.4.0/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
+github.com/joho/godotenv v1.5.1 h1:7eLL/+HRGLY0ldzfGMeQkb7vMd0as4CfYvUVzLqw0N0=
+github.com/joho/godotenv v1.5.1/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
 github.com/wagslane/go-password-validator v0.3.0 h1:vfxOPzGHkz5S146HDpavl0cw1DSVP061Ry2PX0/ON6I=
 github.com/wagslane/go-password-validator v0.3.0/go.mod h1:TI1XJ6T5fRdRnHqHt14pvy1tNVnrwe7m3/f1f2fDphQ=
 golang.org/x/net v0.8.0 h1:Zrh2ngAOFYneWTAIAPethzeaQLuHwhuBkuV6ZiRnUaQ=
