@@ -18,13 +18,42 @@
 package main
 
 import (
+	"log"
+	"os"
+	"strings"
+
 	grpcserver "github.com/dvaumoron/puzzlegrpcserver"
 	"github.com/dvaumoron/puzzlepassstrengthserver/passstrengthserver"
 	pb "github.com/dvaumoron/puzzlepassstrengthservice"
 )
 
 func main() {
+	// should start with this, to benefit from the call to godotenv
 	s := grpcserver.New()
-	pb.RegisterPassstrengthServer(s, passstrengthserver.New())
+
+	defaultPass := os.Getenv("DEFAULT_PASSWORD")
+	rules := readRulesConfig()
+
+	pb.RegisterPassstrengthServer(s, passstrengthserver.New(defaultPass, rules))
 	s.Start()
+}
+
+func readRulesConfig() map[string]string {
+	allLang := strings.Split(os.Getenv("AVAILABLE_LOCALES"), ",")
+	localizedRules := make(map[string]string, len(allLang))
+	for _, lang := range allLang {
+		var pathBuilder strings.Builder
+		pathBuilder.WriteString("rules/rules_")
+		pathBuilder.WriteString(strings.TrimSpace(lang))
+		pathBuilder.WriteString(".txt")
+		path := pathBuilder.String()
+
+		content, err := os.ReadFile(path)
+		if err == nil {
+			localizedRules[lang] = strings.TrimSpace(string(content))
+		} else {
+			log.Println("Failed to load file :", err)
+		}
+	}
+	return localizedRules
 }
