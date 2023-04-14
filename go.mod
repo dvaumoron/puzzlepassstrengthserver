@@ -3,7 +3,7 @@ module github.com/dvaumoron/puzzlepassstrengthserver
 go 1.20
 
 require (
-	github.com/dvaumoron/puzzlegrpcserver v1.1.0
+	github.com/dvaumoron/puzzlegrpcserver v1.1.1
 	github.com/dvaumoron/puzzlepassstrengthservice v1.0.0
 	github.com/wagslane/go-password-validator v0.3.0
 )
