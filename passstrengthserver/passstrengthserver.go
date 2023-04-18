@@ -19,10 +19,13 @@ package passstrengthserver
 
 import (
 	"context"
+	"errors"
 
 	pb "github.com/dvaumoron/puzzlepassstrengthservice"
 	passwordvalidator "github.com/wagslane/go-password-validator"
 )
+
+var errNotFound = errors.New("locale not found")
 
 // server is used to implement puzzlesaltservice.SaltServer
 type server struct {
@@ -36,7 +39,11 @@ func New(defaultPass string, localizedRules map[string]string) pb.PassstrengthSe
 }
 
 func (s server) GetRules(ctx context.Context, request *pb.LangRequest) (*pb.PasswordRules, error) {
-	return &pb.PasswordRules{Description: s.localizedRules[request.Lang]}, nil
+	description, ok := s.localizedRules[request.Lang]
+	if !ok {
+		return nil, errNotFound
+	}
+	return &pb.PasswordRules{Description: description}, nil
 }
 
 func (s server) Check(ctx context.Context, request *pb.PasswordRequest) (*pb.Response, error) {

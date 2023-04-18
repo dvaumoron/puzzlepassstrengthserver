@@ -42,13 +42,13 @@ func readRulesConfig() map[string]string {
 	allLang := strings.Split(os.Getenv("AVAILABLE_LOCALES"), ",")
 	localizedRules := make(map[string]string, len(allLang))
 	for _, lang := range allLang {
+		lang = strings.TrimSpace(lang)
+
 		var pathBuilder strings.Builder
 		pathBuilder.WriteString("rules/rules_")
-		pathBuilder.WriteString(strings.TrimSpace(lang))
+		pathBuilder.WriteString(lang)
 		pathBuilder.WriteString(".txt")
-		path := pathBuilder.String()
-
-		content, err := os.ReadFile(path)
+		content, err := os.ReadFile(pathBuilder.String())
 		if err == nil {
 			localizedRules[lang] = strings.TrimSpace(string(content))
 		} else {
