@@ -18,27 +18,27 @@
 package main
 
 import (
-	"log"
 	"os"
 	"strings"
 
 	grpcserver "github.com/dvaumoron/puzzlegrpcserver"
 	"github.com/dvaumoron/puzzlepassstrengthserver/passstrengthserver"
 	pb "github.com/dvaumoron/puzzlepassstrengthservice"
+	"go.uber.org/zap"
 )
 
 func main() {
 	// should start with this, to benefit from the call to godotenv
-	s := grpcserver.New()
+	s := grpcserver.Make()
 
 	defaultPass := os.Getenv("DEFAULT_PASSWORD")
-	rules := readRulesConfig()
+	rules := readRulesConfig(s.Logger)
 
 	pb.RegisterPassstrengthServer(s, passstrengthserver.New(defaultPass, rules))
 	s.Start()
 }
 
-func readRulesConfig() map[string]string {
+func readRulesConfig(logger *zap.Logger) map[string]string {
 	allLang := strings.Split(os.Getenv("AVAILABLE_LOCALES"), ",")
 	localizedRules := make(map[string]string, len(allLang))
 	for _, lang := range allLang {
@@ -52,7 +52,7 @@ func readRulesConfig() map[string]string {
 		if err == nil {
 			localizedRules[lang] = strings.TrimSpace(string(content))
 		} else {
-			log.Println("Failed to load file :", err)
+			logger.Error("Failed to load file", zap.Error(err))
 		}
 	}
 	return localizedRules
