@@ -18,18 +18,23 @@
 package main
 
 import (
+	_ "embed"
 	"os"
 	"strings"
 
 	grpcserver "github.com/dvaumoron/puzzlegrpcserver"
 	"github.com/dvaumoron/puzzlepassstrengthserver/passstrengthserver"
 	pb "github.com/dvaumoron/puzzlepassstrengthservice"
+	"github.com/uptrace/opentelemetry-go-extra/otelzap"
 	"go.uber.org/zap"
 )
 
+//go:embed version.txt
+var version string
+
 func main() {
 	// should start with this, to benefit from the call to godotenv
-	s := grpcserver.Make()
+	s := grpcserver.Make(passstrengthserver.PassstrengthKey, version)
 
 	defaultPass := os.Getenv("DEFAULT_PASSWORD")
 	rules := readRulesConfig(s.Logger)
@@ -38,7 +43,7 @@ func main() {
 	s.Start()
 }
 
-func readRulesConfig(logger *zap.Logger) map[string]string {
+func readRulesConfig(logger *otelzap.Logger) map[string]string {
 	allLang := strings.Split(os.Getenv("AVAILABLE_LOCALES"), ",")
 	localizedRules := make(map[string]string, len(allLang))
 	for _, lang := range allLang {

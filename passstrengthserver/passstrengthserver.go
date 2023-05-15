@@ -25,6 +25,8 @@ import (
 	passwordvalidator "github.com/wagslane/go-password-validator"
 )
 
+const PassstrengthKey = "puzzlePassstrength"
+
 var errNotFound = errors.New("locale not found")
 
 // server is used to implement puzzlesaltservice.SaltServer
