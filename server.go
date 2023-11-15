@@ -30,6 +30,8 @@ import (
 	"go.uber.org/zap"
 )
 
+const langPlaceHolder = "{{lang}}"
+
 //go:embed version.txt
 var version string
 
@@ -46,15 +48,13 @@ func main() {
 
 func readRulesConfig(logger *otelzap.Logger) map[string]string {
 	allLang := strings.Split(os.Getenv("AVAILABLE_LOCALES"), ",")
+	ruleFilePath := os.Getenv("RULE_FILE_PATH")
 	localizedRules := make(map[string]string, len(allLang))
 	for _, lang := range allLang {
 		lang = strings.TrimSpace(lang)
 
-		var pathBuilder strings.Builder
-		pathBuilder.WriteString("rules/rules_")
-		pathBuilder.WriteString(lang)
-		pathBuilder.WriteString(".txt")
-		content, err := os.ReadFile(pathBuilder.String())
+		path := strings.ReplaceAll(ruleFilePath, langPlaceHolder, lang)
+		content, err := os.ReadFile(path)
 		if err == nil {
 			localizedRules[lang] = strings.TrimSpace(string(content))
 		} else {
